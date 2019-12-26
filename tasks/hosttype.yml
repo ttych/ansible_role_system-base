@@ -1,0 +1,8 @@
+---
+- name: set {{ hosttype_file }} to {{ hosttype }}
+  copy:
+    dest: "{{ hosttype_file }}"
+    content: "{{ hosttype }}"
+    mode: 0644
+    owner: root
+    group: "{{ root_group }}"

@@ -1,0 +1,31 @@
+---
+- name: check that /usr/local directory
+  stat:
+    path: /usr/local
+  register: usr_local_stat
+
+# create /usr/local structure
+- name: create /usr/local directory tree
+  file:
+    path: "/usr/local/{{ item.dest }}"
+    mode: "{{ item.mode }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    state: "{{ item.state }}"
+  with_flattened:
+    - "{{ usr_local_dirs['common'] }}"
+    - "{{ usr_local_dirs[ansible_system] }}"
+  when: usr_local_stat.stat.exists == True
+
+- name: create /usr/local links
+  file:
+    path: "/usr/local/{{ item.dest }}"
+    src: "/usr/local/{{ item.src }}"
+    mode: "{{ item.mode }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    state: "{{ item.state }}"
+  with_flattened:
+    - "{{ usr_local_links['common'] }}"
+    - "{{ usr_local_links[ansible_system] }}"
+  when: usr_local_stat.stat.exists == True

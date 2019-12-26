@@ -1,0 +1,5 @@
+---
+- block:
+    - include_tasks: root.yml
+    - include_tasks: hosttype.yml
+    - include_tasks: usr_local.yml

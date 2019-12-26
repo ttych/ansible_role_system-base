@@ -1,0 +1,4 @@
+---
+- set_fact:
+    root_group: wheel
+  when: ansible_system == "FreeBSD"
