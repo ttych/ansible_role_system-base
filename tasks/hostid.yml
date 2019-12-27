@@ -1,0 +1,25 @@
+---
+- name: hostid setup on Linux
+  block:
+    # copy sethostid
+    - copy:
+        src: 'bin/{{ item }}'
+        dest: '/usr/local/bin/{{ item }}'
+        owner: root
+        group: root
+        mode: 0755
+      with_items:
+        - sethostid
+
+    # check hostid file is present
+    - name: check that {{ hostid_file }} exists
+      stat:
+        path: '{{ hostid_file }}'
+      register: hostid_file_stat
+
+    # create hostid file if missing
+    - name: create {{ hostid_file }}
+      shell: /usr/local/bin/sethostid
+      when: hostid_file_stat.stat.exists == False
+
+  when: ansible_system == 'Linux'

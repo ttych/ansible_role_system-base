@@ -1,28 +1,33 @@
 ---
 hosttype_file: /etc/hosttype
 
-usr_local_dirs:
+system_directories:
   common:
-    - { dest: 'bin', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
-    - { dest: 'etc', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
-    - { dest: 'include', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
-    - { dest: 'lib', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
-    - { dest: 'sbin', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
-    - { dest: 'share', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+    - { dest: '/usr/local', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+    - { dest: '/usr/local/bin', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+    - { dest: '/usr/local/etc', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+    - { dest: '/usr/local/include', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+    - { dest: '/usr/local/lib', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+    - { dest: '/usr/local/sbin', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+    - { dest: '/usr/local/share', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
 
   FreeBSD:
-    - { dest: 'libdata', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
-    - { dest: 'libexec', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
-    - { dest: 'man', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
-    - { dest: 'etc/rc.d', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+    - { dest: '/usr/local/libdata', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+    - { dest: '/usr/local/libexec', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+    - { dest: '/usr/local/man', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+    - { dest: '/usr/local/etc/rc.d', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
 
   Linux:
-    - { dest: 'games', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
-    - { dest: 'share/man', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
-    - { dest: 'src', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+    - { dest: '/usr/local/games', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+    - { dest: '/usr/local/share/man', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+    - { dest: '/usr/local/src', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
 
-usr_local_links:
+system_links:
   common: []
+
   FreeBSD: []
+
   Linux:
-    - { dest: 'man', src: 'share/man', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'link' }
+    - { dest: '/usr/local/man', src: '/usr/local/share/man', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'link' }
+
+hostid_file: /etc/hostid
