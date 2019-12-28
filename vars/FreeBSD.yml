@@ -1,0 +1,11 @@
+---
+specific_directories:
+  - { dest: '/usr/local/libdata', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+  - { dest: '/usr/local/libexec', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+  - { dest: '/usr/local/man', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+  - { dest: '/usr/local/etc/rc.d', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
+
+specific_links: []
+
+specific_packages:
+  - ca_root_nss

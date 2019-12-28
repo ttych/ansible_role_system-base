@@ -1,6 +1,16 @@
 ---
 - block:
+    - name: context specific variables
+      include_vars:
+        file: "{{ item }}"
+      with_first_found:
+        - "{{ ansible_distribution_release }}.yml"
+        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
+        - "{{ ansible_system }}.yml"
+        - "empty.yml"
     - include_tasks: root.yml
     - include_tasks: hosttype.yml
     - include_tasks: directories.yml
     - include_tasks: hostid.yml
+    - include_tasks: packages.yml

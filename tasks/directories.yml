@@ -7,8 +7,8 @@
     group: "{{ item.group }}"
     state: "{{ item.state }}"
   with_flattened:
-    - "{{ system_directories['common'] }}"
-    - "{{ system_directories[ansible_system] }}"
+    - "{{ common_directories }}"
+    - "{{ specific_directories }}"
 
 - name: create /usr/local links
   file:
@@ -19,5 +19,5 @@
     group: "{{ item.group }}"
     state: "{{ item.state }}"
   with_flattened:
-    - "{{ system_links['common'] }}"
-    - "{{ system_links[ansible_system] }}"
+    - "{{ common_links }}"
+    - "{{ specific_links }}"
