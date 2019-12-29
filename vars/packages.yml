@@ -92,22 +92,29 @@ packages_server:
 packages_desktop:
   common:
     - emacs
+    - filezilla
+    - firefox
+    - gcompris
+    - gimp
+    - gthumb
     - mplayer
+    - putty
     - vim
     - vlc
+    - wine
+    - winetricks
+    - xbindkeys
+    - xclip
+    - xsel-conrad
     - xterm
   FreeBSD:
+    - chromium
+    - fr-gimp-help-html
   Ubuntu:
-    - putty
-    - gthumb
-    - gimp
     - gimp-help-fr
-    - firefox
     - firefox-locale-fr
-    - filezilla
     - chromium-browser
     - virtualbox
-    - wine
     - wine32
     - steam
     # - steamcmd
@@ -119,9 +126,6 @@ packages_desktop:
     - mythes-fr
     - handbrake
     - handbrake-cli
-    - xbindkeys
     - xbindkeys-config
-    - gcompris
     - gparted
-    - xclip
     - xsel
