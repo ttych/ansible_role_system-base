@@ -1,0 +1,18 @@
+---
+- name: "create {{ user.name }} user"
+  user:
+    name: "{{ user.name }}"
+    uid: "{{ user.uid }}"
+    comment: "{{ user.comment }}"
+    create_home: "{{ user.create_home | default(omit) }}"
+    force: yes
+    group: "{{ user.group }}"
+    groups: "{{ user.groups }}"
+    shell: "{{ user.shell | default('/usr/sbin/nologin') }}"
+    state: present
+
+- name: "set {{ user.name }} password"
+  user:
+    name: "{{ user.name }}"
+    password: "{{ user.password }}"
+  when: user.password is defined

@@ -14,3 +14,6 @@
     - include_tasks: directories.yml
     - include_tasks: hostid.yml
     - include_tasks: packages.yml
+    - include_tasks: groups.yml
+    - include_tasks: users.yml
+    - include_tasks: sudoers.yml

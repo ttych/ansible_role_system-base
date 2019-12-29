@@ -8,3 +8,8 @@ specific_links:
   - { dest: '/usr/local/man', src: '/usr/local/share/man', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'link' }
 
 specific_packages: []
+
+specific_groups:
+  - { name: netdev, system: yes }
+
+specific_users: []

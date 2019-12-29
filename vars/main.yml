@@ -18,3 +18,17 @@ common_packages:
   - zsh
 
 hostid_file: /etc/hostid
+
+common_groups:
+  - { name: admin, gid: 2001 }
+  - { name: empowered, gid: 2011 }
+
+common_users:
+  - name: admin
+    comment: admin
+    group: admin
+    groups:
+    shell: /bin/sh
+    uid: 2001
+    home_mode: '0700'
+    password: '*'

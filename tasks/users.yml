@@ -1,0 +1,3 @@
+---
+- include: user.yml user="{{ item }}"
+  with_items: "{{ common_users + specific_users }}"

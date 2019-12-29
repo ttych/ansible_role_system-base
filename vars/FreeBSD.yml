@@ -9,3 +9,10 @@ specific_links: []
 
 specific_packages:
   - ca_root_nss
+
+specific_groups: []
+
+specific_users: []
+
+sudoers_file: /usr/local/etc/sudoers
+sudoers_d_dir: /usr/local/etc/sudoers.d

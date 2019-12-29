@@ -1,2 +1,5 @@
 ---
 root_group: root
+
+sudoers_file: /etc/sudoers
+sudoers_d_dir: /etc/sudoers.d

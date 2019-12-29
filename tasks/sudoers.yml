@@ -1,0 +1,11 @@
+---
+- copy:
+    src: 'sudoers.d/{{ item }}'
+    dest: '{{ sudoers_d_dir }}/{{ item }}'
+    owner: root
+    group: "{{ root_group }}"
+    mode: 0440
+    validate: 'sh -c "cat {{ sudoers_file }} %s | visudo -cf-"'
+  with_items:
+    - admin
+    - empowered
