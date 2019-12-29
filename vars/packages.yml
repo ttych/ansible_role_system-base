@@ -1,0 +1,127 @@
+---
+packages_base:
+  common:
+    - apg
+    - bash
+    - curl
+    - dvdbackup
+    - expect
+    - ffmpeg
+    - flac
+    - gdisk
+    - git
+    - htop
+    - iat
+    - iperf
+    - iperf3
+    - knocker
+    - latex2html
+    - lftp
+    - makepasswd
+    - mercurial
+    - nmap
+    - p7zip
+    - python
+    - rar
+    - rsync
+    - ruby
+    - screen
+    - sshpass
+    - sudo
+    - tmux
+    - unrar
+    - unzip
+    - wget
+    - zip
+    - zfsnap
+    - zsh
+  FreeBSD:
+    - ca_root_nss
+    - daemontools-encore
+    - fusefs-sshfs
+    - knock
+    - ksh93
+    - p7zip-codec-rar
+    - py36-ansible
+    - readline
+    - rubygem-capistrano
+    - sqlite3
+    - zfsnap2
+  Ubuntu:
+    - abcde
+    - ansible
+    - aptitude
+    - apt-file
+    - autofs
+    - capistrano
+    - daemontools
+    - eyed3
+    - gcc
+    - g++
+    - gpart
+    - knockd
+    - ksh
+    - lame
+    - libreadline-dev
+    - libsqlite3-dev
+    - lm-sensors
+    - nfs-common
+    - nfs-kernel-server
+    - openssh-server
+    - samba
+    - software-properties-common
+    - sshfs
+    - strace
+    - tightvncserver
+    - ubuntu-standard
+    - zfsutils-linux
+
+packages_server:
+  common:
+    - emacs-nox
+  FreeBSD:
+    - vim-console
+  Ubuntu:
+    - dhcpcd-common
+    - dhcping
+    - dhcpd-pools
+    - dhcpdump
+    - isc-dhcp-server
+    - vim-nox
+
+packages_desktop:
+  common:
+    - emacs
+    - mplayer
+    - vim
+    - vlc
+    - xterm
+  FreeBSD:
+  Ubuntu:
+    - putty
+    - gthumb
+    - gimp
+    - gimp-help-fr
+    - firefox
+    - firefox-locale-fr
+    - filezilla
+    - chromium-browser
+    - virtualbox
+    - wine
+    - wine32
+    - steam
+    # - steamcmd
+    - libreoffice
+    - hunspell-fr
+    - hyphen-fr
+    - libreoffice-help-fr
+    - libreoffice-l10n-fr
+    - mythes-fr
+    - handbrake
+    - handbrake-cli
+    - xbindkeys
+    - xbindkeys-config
+    - gcompris
+    - gparted
+    - xclip
+    - xsel

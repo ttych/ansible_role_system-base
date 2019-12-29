@@ -12,11 +12,6 @@ common_directories:
 
 common_links: []
 
-common_packages:
-  - bash
-  - sudo
-  - zsh
-
 hostid_file: /etc/hostid
 
 common_groups:

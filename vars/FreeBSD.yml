@@ -7,9 +7,6 @@ specific_directories:
 
 specific_links: []
 
-specific_packages:
-  - ca_root_nss
-
 specific_groups: []
 
 specific_users: []

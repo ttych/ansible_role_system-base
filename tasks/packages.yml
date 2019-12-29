@@ -1,5 +1,39 @@
 ---
-- name: install base packages
-  package:
-    name: "{{ common_packages + specific_packages }}"
-    state: latest
+- name: packages vars
+  include_vars:
+    file: packages.yml
+
+# - name: install base packages
+#   package:
+#     name: "{{ common_packages + specific_packages }}"
+#     state: latest
+
+- name: apt
+  block:
+    - name: apt based update
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: "{{ packages_cache_ttl }}"
+
+    - name: "apt install {{ hosttype }} packages"
+      apt:
+        name: "{{ packages_base['common']  +  packages_base[ansible_distribution]  +  vars['packages_' + hosttype]['common']  +  vars['packages_' + hosttype][ansible_distribution] }}"
+        state: latest
+        update_cache: yes
+        cache_valid_time: "{{ packages_cache_ttl }}"
+        autoremove: yes
+
+  when: ansible_pkg_mgr == 'apt'
+
+- name: FreeBSD
+  block:
+    - name: update catalog
+      shell: "pkg update -q"
+      changed_when: false
+
+    - name: "pkg install {{ hosttype }} packages"
+      pkgng:
+        name: "{{ packages_base['common']  +  packages_base[ansible_distribution]  +  vars['packages_' + hosttype]['common']  +  vars['packages_' + hosttype][ansible_distribution] }}"
+        state: latest
+
