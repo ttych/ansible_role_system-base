@@ -1,0 +1,9 @@
+---
+- name: set sysctls
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+    reload: yes
+    sysctl_file: "{{ sysctl_file }}"
+  loop: "{{ sysctls }}"

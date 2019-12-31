@@ -11,6 +11,7 @@
         - "empty.yml"
     - include_tasks: root.yml
     - include_tasks: hosttype.yml
+    - include_tasks: sysctls.yml
     - include_tasks: directories.yml
     - include_tasks: hostid.yml
     - include_tasks: repositories.yml
@@ -18,4 +19,3 @@
     - include_tasks: groups.yml
     - include_tasks: users.yml
     - include_tasks: sudoers.yml
-

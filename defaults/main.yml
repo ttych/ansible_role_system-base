@@ -6,3 +6,5 @@ sudoers_file: /etc/sudoers
 sudoers_d_dir: /etc/sudoers.d
 
 packages_cache_ttl: 43200
+
+sysctl_file: /etc/sysctl.conf

@@ -13,3 +13,12 @@ specific_users: []
 
 sudoers_file: /usr/local/etc/sudoers
 sudoers_d_dir: /usr/local/etc/sudoers.d
+
+sysctls:
+  - { name: security.bsd.see_other_uids, value: 0 }
+  - { name: security.bsd.see_other_gids, value: 0 }
+  - { name: security.bsd.see_jail_proc, value: 0 }
+  - { name: security.bsd.unprivileged_read_msgbuf, value: 0 }
+  - { name: security.bsd.unprivileged_proc_debug, value: 0 }
+  - { name: kern.randompid, value: 1 }
+  - { name: vfs.zfs.min_auto_ashift, value: 12 }
