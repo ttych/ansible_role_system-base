@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# Purpose: Write the passed in parameter as hostid to /etc/hostid
+#          If no parameter is passed, write current hostid to /etc/hostid
+# Author:  Fazle Arefin
+
+if [ -n "$1" ]; then
+  hostid="$1"
+  # chars must be 0-9, a-f, A-F and exactly 8 chars
+  echo "$hostid" | egrep -o '^[a-fA-F0-9]{8}$' || exit 1
+else
+  hostid="$(hostid)"
+fi
+
+hostid_tmp=${hostid%??}
+a=${hostid#$hostid_tmp}
+hostid=$hostid_tmp
+
+hostid_tmp=${hostid%??}
+b=${hostid#$hostid_tmp}
+hostid=$hostid_tmp
+
+hostid_tmp=${hostid%??}
+c=${hostid#$hostid_tmp}
+hostid=$hostid_tmp
+
+hostid_tmp=${hostid%??}
+d=${hostid#$hostid_tmp}
+hostid=$hostid_tmp
+
+/usr/bin/printf '%b' "\x$a" "\x$b" "\x$c" "\x$d" > /etc/hostid

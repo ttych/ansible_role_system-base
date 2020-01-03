@@ -8,3 +8,6 @@ sudoers_d_dir: /etc/sudoers.d
 packages_cache_ttl: 43200
 
 sysctl_file: /etc/sysctl.conf
+
+ubuntu_release_upgrades_mode: normal
+ubuntu_release_upgrades_conf: /etc/update-manager/release-upgrades

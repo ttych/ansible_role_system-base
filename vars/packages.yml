@@ -22,7 +22,6 @@ packages_base:
     - nmap
     - p7zip
     - python
-    - rar
     - rsync
     - ruby
     - screen
@@ -35,6 +34,8 @@ packages_base:
     - zip
     - zfsnap
     - zsh
+  common_x86_64:
+    - rar
   FreeBSD:
     - ca_root_nss
     - daemontools-encore
@@ -43,6 +44,7 @@ packages_base:
     - ksh93
     - p7zip-codec-rar
     - py36-ansible
+    - rar
     - readline
     - rubygem-capistrano
     - sqlite3
@@ -100,32 +102,39 @@ packages_desktop:
     - mplayer
     - putty
     - vim
+    - xbindkeys
+    - xclip
+    - xterm
+  common_x86_64:
     - vlc
     - wine
     - winetricks
-    - xbindkeys
-    - xclip
-    - xsel-conrad
-    - xterm
+  common_amd64:
+    - vlc
+    - wine
+    - winetricks
   FreeBSD:
     - chromium
     - fr-gimp-help-html
+    - xsel-conrad
   Ubuntu:
     - gimp-help-fr
     - firefox-locale-fr
     - chromium-browser
-    - virtualbox
-    - wine32
-    - steam
-    # - steamcmd
+    - chromium-browser-l10n
     - libreoffice
     - hunspell-fr
     - hyphen-fr
     - libreoffice-help-fr
     - libreoffice-l10n-fr
     - mythes-fr
-    - handbrake
-    - handbrake-cli
     - xbindkeys-config
     - gparted
     - xsel
+  Ubuntu_x86_64:
+    - handbrake
+    - handbrake-cli
+    - virtualbox
+    - wine32
+    - steam
+    # - steamcmd

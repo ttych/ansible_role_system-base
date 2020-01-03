@@ -17,20 +17,39 @@
             update_cache: yes
       when: dpkg_foreign_architectures.stdout is not match('i386')
 
-  when: want_i386_architecture
+  when: ansible_architecture in ['x86_64', "amd64"] and want_i386_architecture
 
 - apt_repository:
     repo: "{{ item }}"
     state: present
   with_items:
-    - "deb http://fr.archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }} main restricted"
-    - "deb http://fr.archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }}-updates main restricted"
-    - "deb http://fr.archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }}  universe"
-    - "deb http://fr.archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }}-updates universe"
-    - "deb http://fr.archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }}  multiverse"
-    - "deb http://fr.archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }}-updates multiverse"
-    - "deb http://fr.archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }}-backports main restricted universe multiverse"
+    - "deb http://archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }} main restricted"
+    - "deb http://archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }}-updates main restricted"
+    - "deb http://archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }} universe"
+    - "deb http://archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }}-updates universe"
+    - "deb http://archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }} multiverse"
+    - "deb http://archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }}-updates multiverse"
+    - "deb http://archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }}-backports main restricted universe multiverse"
     - "deb http://security.ubuntu.com/ubuntu {{ ansible_lsb.codename }}-security main restricted"
     - "deb http://security.ubuntu.com/ubuntu {{ ansible_lsb.codename }}-security universe"
     - "deb http://security.ubuntu.com/ubuntu {{ ansible_lsb.codename }}-security multiverse"
     # - "deb http://archive.canonical.com/ubuntu {{ ansible_lsb.codename }} partner
+  when: ansible_architecture in ['x86_64', "amd64"]
+
+- apt_repository:
+    repo: "{{ item }}"
+    state: present
+  with_items:
+    - "deb http://ports.ubuntu.com/ {{ ansible_lsb.codename }} main restricted universe multiverse"
+    - "deb-src http://ports.ubuntu.com/ {{ ansible_lsb.codename }} main restricted universe multiverse"
+    - "deb http://ports.ubuntu.com/ {{ ansible_lsb.codename }}-updates main restricted universe multiverse"
+    - "deb-src http://ports.ubuntu.com/ {{ ansible_lsb.codename }}-updates main restricted universe multiverse"
+    - "deb http://ports.ubuntu.com/ {{ ansible_lsb.codename }}-security main restricted universe multiverse"
+    - "deb-src http://ports.ubuntu.com/ {{ ansible_lsb.codename }}-security main restricted universe multiverse"
+    - "deb http://ports.ubuntu.com/ {{ ansible_lsb.codename }}-backports main restricted universe multiverse"
+    - "deb-src http://ports.ubuntu.com/ {{ ansible_lsb.codename }}-backports main restricted universe multiverse"
+    - "deb http://ports.ubuntu.com/ubuntu-ports/ {{ ansible_lsb.codename }} main universe restricted multiverse"
+    - "deb http://ports.ubuntu.com/ubuntu-ports/ {{ ansible_lsb.codename }}-security multiverse universe restricted main"
+    - "deb http://ports.ubuntu.com/ubuntu-ports/ {{ ansible_lsb.codename }}-updates multiverse universe restricted main"
+    - "deb http://ports.ubuntu.com/ubuntu-ports/ {{ ansible_lsb.codename }}-backports multiverse universe restricted main"
+  when: ansible_architecture in ['aarch64']

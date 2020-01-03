@@ -18,7 +18,15 @@
 
     - name: "apt install {{ hosttype }} packages"
       apt:
-        name: "{{ packages_base['common']  +  packages_base[ansible_distribution]  +  vars['packages_' + hosttype]['common']  +  vars['packages_' + hosttype][ansible_distribution] }}"
+        name: "{{ packages_base['common'] \
+                  + (packages_base['common_' + ansible_architecture] | default([])) \
+                  + (packages_base[ansible_distribution] | default([])) \
+                  + (packages_base[ansible_distribution + '_' + ansible_architecture] | default([])) \
+                  + (vars['packages_' + hosttype]['common'] | default([])) \
+                  + (vars['packages_' + hosttype]['common_' + ansible_architecture] | default([])) \
+                  + (vars['packages_' + hosttype][ansible_distribution] | default([])) \
+                  + (vars['packages_' + hosttype][ansible_distribution + '_' + ansible_architecture] | default([])) \
+               }}"
         state: latest
         update_cache: yes
         cache_valid_time: "{{ packages_cache_ttl }}"
@@ -34,6 +42,15 @@
 
     - name: "pkg install {{ hosttype }} packages"
       pkgng:
-        name: "{{ packages_base['common']  +  packages_base[ansible_distribution]  +  vars['packages_' + hosttype]['common']  +  vars['packages_' + hosttype][ansible_distribution] }}"
+        name: "{{ packages_base['common'] \
+                  + (packages_base['common_' + ansible_architecture] | default([])) \
+                  + (packages_base[ansible_distribution] | default([])) \
+                  + (packages_base[ansible_distribution + '_' + ansible_architecture] | default([])) \
+                  + (vars['packages_' + hosttype]['common'] | default([])) \
+                  + (vars['packages_' + hosttype]['common_' + ansible_architecture] | default([])) \
+                  + (vars['packages_' + hosttype][ansible_distribution] | default([])) \
+                  + (vars['packages_' + hosttype][ansible_distribution + '_' + ansible_architecture] | default([])) \
+               }}"
         state: latest
 
+  when: ansible_os_family == 'FreeBSD'
