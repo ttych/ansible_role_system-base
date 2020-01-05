@@ -8,6 +8,23 @@
 #     name: "{{ common_packages + specific_packages }}"
 #     state: latest
 
+- name: compute package list
+  set_fact:
+    system_computed_packages: "{{ packages_base['common'] \
+                  + (packages_base['common_' + ansible_architecture] | default([])) \
+                  + (packages_base[ansible_distribution] | default([])) \
+                  + (packages_base[ansible_distribution + '_' + ansible_architecture] | default([])) \
+                  + (vars['packages_' + hosttype]['common'] | default([])) \
+                  + (vars['packages_' + hosttype]['common_' + ansible_architecture] | default([])) \
+                  + (vars['packages_' + hosttype][ansible_distribution] | default([])) \
+                  + (vars['packages_' + hosttype][ansible_distribution + '_' + ansible_architecture] | default([])) \
+               }}"
+
+- name: add desktop flavor to computed package list
+  set_fact:
+    system_computed_packages: "{{ system_computed_packages + [vars[ansible_distribution + '_desktop_flavor']] }}"
+  when: hosttype == 'desktop' and vars[ansible_distribution + '_desktop_flavor'] is defined and vars[ansible_distribution + '_desktop_flavor']
+
 - name: apt
   block:
     - name: apt based update
@@ -18,15 +35,7 @@
 
     - name: "apt install {{ hosttype }} packages"
       apt:
-        name: "{{ packages_base['common'] \
-                  + (packages_base['common_' + ansible_architecture] | default([])) \
-                  + (packages_base[ansible_distribution] | default([])) \
-                  + (packages_base[ansible_distribution + '_' + ansible_architecture] | default([])) \
-                  + (vars['packages_' + hosttype]['common'] | default([])) \
-                  + (vars['packages_' + hosttype]['common_' + ansible_architecture] | default([])) \
-                  + (vars['packages_' + hosttype][ansible_distribution] | default([])) \
-                  + (vars['packages_' + hosttype][ansible_distribution + '_' + ansible_architecture] | default([])) \
-               }}"
+        name: "{{ system_computed_packages }}"
         state: latest
         update_cache: yes
         cache_valid_time: "{{ packages_cache_ttl }}"
@@ -42,15 +51,7 @@
 
     - name: "pkg install {{ hosttype }} packages"
       pkgng:
-        name: "{{ packages_base['common'] \
-                  + (packages_base['common_' + ansible_architecture] | default([])) \
-                  + (packages_base[ansible_distribution] | default([])) \
-                  + (packages_base[ansible_distribution + '_' + ansible_architecture] | default([])) \
-                  + (vars['packages_' + hosttype]['common'] | default([])) \
-                  + (vars['packages_' + hosttype]['common_' + ansible_architecture] | default([])) \
-                  + (vars['packages_' + hosttype][ansible_distribution] | default([])) \
-                  + (vars['packages_' + hosttype][ansible_distribution + '_' + ansible_architecture] | default([])) \
-               }}"
+        name: "{{ system_computed_packages }}"
         state: latest
 
   when: ansible_os_family == 'FreeBSD'

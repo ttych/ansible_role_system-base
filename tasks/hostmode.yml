@@ -1,0 +1,24 @@
+---
+
+- name: set systemctl default
+  block:
+    - name: get current default
+      shell: "systemctl get-default"
+      register: systemctl_get_default
+      changed_when: false
+
+    - name: default should be graphical.target
+      set_fact:
+        system_systemd_default: graphical.target
+      when: hosttype == 'desktop'
+
+    - name: default should be multi-user.target
+      set_fact:
+        system_systemd_default: multi-user.target
+      when: hosttype == 'server'
+
+    - name: set default
+      shell: "systemctl set-default {{ system_systemd_default }}"
+      when: system_systemd_default is defined and systemctl_get_default.stdout != system_systemd_default
+
+  when: ansible_service_mgr == 'systemd'

@@ -1,8 +1,8 @@
 ---
 - name: set Ubuntu upgrade mode
   lineinfile:
-    path: "{{ ubuntu_release_upgrades_conf }}"
+    path: "{{ Ubuntu_release_upgrades_conf }}"
     regexp: "^Prompt="
-    line: "Prompt={{ ubuntu_release_upgrades_mode }}"
+    line: "Prompt={{ Ubuntu_release_upgrades_mode }}"
   when: ansible_distribution == "Ubuntu"
 

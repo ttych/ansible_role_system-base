@@ -32,7 +32,6 @@ packages_base:
     - unzip
     - wget
     - zip
-    - zfsnap
     - zsh
   common_x86_64:
     - rar
@@ -76,6 +75,8 @@ packages_base:
     - strace
     - tightvncserver
     - ubuntu-standard
+  Ubuntu_x86_64:
+    - zfsnap
     - zfsutils-linux
 
 packages_server:
