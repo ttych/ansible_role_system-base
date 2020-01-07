@@ -46,6 +46,7 @@ packages_base:
     - rar
     - readline
     - rubygem-capistrano
+    - rubygem-irb
     - sqlite3
     - zfsnap2
   Ubuntu:
