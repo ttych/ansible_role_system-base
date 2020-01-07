@@ -1,7 +1,7 @@
 ---
 - name: create base system directories
   file:
-    path: "/usr/local/{{ item.dest }}"
+    path: "{{ item.dest }}"
     mode: "{{ item.mode }}"
     owner: "{{ item.owner }}"
     group: "{{ item.group }}"
@@ -10,10 +10,10 @@
     - "{{ common_directories }}"
     - "{{ specific_directories }}"
 
-- name: create /usr/local links
+- name: create base system links
   file:
-    path: "/usr/local/{{ item.dest }}"
-    src: "/usr/local/{{ item.src }}"
+    path: "{{ item.dest }}"
+    src: "{{ item.src }}"
     mode: "{{ item.mode }}"
     owner: "{{ item.owner }}"
     group: "{{ item.group }}"

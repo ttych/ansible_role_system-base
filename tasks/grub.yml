@@ -1,0 +1,59 @@
+---
+- name: Gather package facts
+  package_facts:
+    manager: auto
+
+- block:
+    - name: set GRUB_TIMEOUT
+      lineinfile:
+        path: "{{ grub_configuration_path }}"
+        regexp: '^GRUB_TIMEOUT='
+        line: "GRUB_TIMEOUT={{ grub_timeout }}"
+      register: grub_conf_timeout_task
+
+    - name: set GRUB_RECORDFAIL_TIMEOUT
+      lineinfile:
+        path: "{{ grub_configuration_path }}"
+        regexp: '^GRUB_RECORDFAIL_TIMEOUT='
+        line: "GRUB_RECORDFAIL_TIMEOUT={{ grub_recordfail_timeout }}"
+      register: grub_conf_recordfail_timeout_task
+
+    - block:
+        - name: set GRUB_CMDLINE_LINUX_DEFAULT
+          lineinfile:
+            path: "{{ grub_configuration_path }}"
+            regexp: '^GRUB_CMDLINE_LINUX_DEFAULT='
+            line: 'GRUB_CMDLINE_LINUX_DEFAULT=""'
+          register: grub_conf_cmdline_linux_default_task
+
+        - name: set GRUB_TERMINAL
+          lineinfile:
+            path: "{{ grub_configuration_path }}"
+            regexp: '^GRUB_TERMINAL='
+            line: 'GRUB_TERMINAL=console'
+          register: grub_conf_terminal_task
+
+      when: grub_display == 'console'
+
+    - block:
+        - name: set GRUB_CMDLINE_LINUX_DEFAULT
+          lineinfile:
+            path: "{{ grub_configuration_path }}"
+            regexp: '^GRUB_CMDLINE_LINUX_DEFAULT='
+            line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
+          register: grub_conf_cmdline_linux_default_task
+
+        - name: set GRUB_TERMINAL
+          lineinfile:
+            path: "{{ grub_configuration_path }}"
+            regexp: '^GRUB_TERMINAL='
+            state: absent
+          register: grub_conf_terminal_task
+
+      when: grub_display == 'graphic'
+
+    - name: update-grub
+      shell: update-grub
+      when: grub_conf_cmdline_linux_default_task is changed or grub_conf_terminal_task is changed or grub_conf_timeout_task is changed or grub_conf_recordfail_timeout_task is changed
+
+  when: "'grub-common' in ansible_facts.packages or 'grub2-common' in ansible_facts.packages"

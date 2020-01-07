@@ -13,3 +13,8 @@ Ubuntu_release_upgrades_mode: normal
 Ubuntu_release_upgrades_conf: /etc/update-manager/release-upgrades
 
 Ubuntu_desktop_flavor: lubuntu-desktop
+
+grub_display: console
+grub_timeout: 5
+grub_recordfail_timeout: 5
+grub_configuration_path: /etc/default/grub

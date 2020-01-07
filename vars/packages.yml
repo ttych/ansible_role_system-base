@@ -17,7 +17,6 @@ packages_base:
     - knocker
     - latex2html
     - lftp
-    - makepasswd
     - mercurial
     - nmap
     - p7zip
@@ -34,6 +33,7 @@ packages_base:
     - zip
     - zsh
   common_x86_64:
+    - makepasswd
     - rar
   FreeBSD:
     - ca_root_nss
@@ -42,7 +42,7 @@ packages_base:
     - knock
     - ksh93
     - p7zip-codec-rar
-    - py36-ansible
+    - py37-ansible
     - rar
     - readline
     - rubygem-capistrano
