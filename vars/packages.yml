@@ -49,6 +49,7 @@ packages_base:
     - rubygem-irb
     - sqlite3
     - zfsnap2
+    - zfs-stats
   Ubuntu:
     - abcde
     - ansible
