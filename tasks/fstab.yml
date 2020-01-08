@@ -1,0 +1,11 @@
+---
+- name: Set base mountpoint in fstab
+  mount:
+    path: "{{ fstab_entry.path }}"
+    src: "{{ fstab_entry.src }}"
+    fstype: "{{ fstab_entry.fstype }}"
+    opts: "{{ fstab_entry.opts }}"
+    state: "{{ fstab_entry.state }}"
+  loop: "{{ fstabs }}"
+  loop_control:
+    loop_var: fstab_entry

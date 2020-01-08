@@ -22,3 +22,28 @@ sysctls:
   - { name: security.bsd.unprivileged_proc_debug, value: 0 }
   - { name: kern.randompid, value: 1 }
   - { name: vfs.zfs.min_auto_ashift, value: 12 }
+
+fstabs:
+  - { path: /dev, src: devfs, fstype: devfs, opts: rw, state: mounted }
+  - { path: /dev/fd, src: fdesc, fstype: fdescfs, opts: rw, state: mounted }
+  - { path: /proc, src: proc, fstype: procfs, opts: rw, state: mounted }
+  - { path: /ram, src: tmpfs, fstype: tmpfs, opts: "rw,mode=01777,size=6g,noauto", state: present }
+
+services:
+  - { name: zfs_enable, value: "YES" }
+  - { name: clear_tmp_enable, value: "YES" }
+  - { name: powerd_enable, value: "YES" }
+  - { name: tmpmfs, value: "YES" }
+  - { name: tmpsize, value: 100m }
+  - { name: syslogd_flags, value: "-ss" }
+  - { name: sendmail_enable, value: "NONE" }
+  - { name: sshd_enable, value: "YES" }
+  - { name: ntpd_enable, value: "YES" }
+  - { name: ntpd_sync_on_start, value: "YES" }
+  - { name: nfs_server_enable, value: "YES" }
+  - { name: rpc_lockd_enable, value: "YES" }
+  - { name: rpc_statd_enable, value: "YES" }
+  - { name: rpcbind_enable, value: "YES" }
+  - { name: pf_enable, value: "YES" }
+  - { name: pflog_enable, value: "YES" }
+  - { name: dbus_enable, value: "YES" }

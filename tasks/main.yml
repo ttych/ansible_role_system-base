@@ -21,4 +21,6 @@
     - include_tasks: users.yml
     - include_tasks: sudoers.yml
     - include_tasks: hostmode.yml
+    - include_tasks: fstab.yml
+    - include_tasks: services.yml
     - include_tasks: grub.yml

@@ -18,3 +18,7 @@ grub_display: console
 grub_timeout: 5
 grub_recordfail_timeout: 5
 grub_configuration_path: /etc/default/grub
+
+fstabs: []
+
+services: []
