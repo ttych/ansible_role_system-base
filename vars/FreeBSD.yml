@@ -24,7 +24,7 @@ sysctls:
   - { name: vfs.zfs.min_auto_ashift, value: 12 }
 
 fstabs:
-  - { path: /dev, src: devfs, fstype: devfs, opts: rw, state: mounted }
+  # - { path: /dev, src: devfs, fstype: devfs, opts: rw, state: mounted }
   - { path: /dev/fd, src: fdesc, fstype: fdescfs, opts: rw, state: mounted }
   - { path: /proc, src: proc, fstype: procfs, opts: rw, state: mounted }
   - { path: /ram, src: tmpfs, fstype: tmpfs, opts: "rw,mode=01777,size=6g,noauto", state: present }
