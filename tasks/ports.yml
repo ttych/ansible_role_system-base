@@ -1,0 +1,17 @@
+---
+- name: install FreeBSD ports
+  block:
+    - name: check if installed
+      stat:
+        path: /usr/ports/.portsnap.INDEX
+      register: stat_portsnap_index
+
+    - name: install ports with portsnap extract
+      shell: portsnap --interactive fetch extract
+      when: stat_portsnap_index.stat.exists == False
+
+    - name: update ports with portsnap fetch update
+      shell: portsnap --interactive fetch update
+      changed_when: no
+
+  when: ansible_distribution == 'FreeBSD'
