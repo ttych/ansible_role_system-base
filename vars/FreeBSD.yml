@@ -29,7 +29,7 @@ fstabs:
   - { path: /proc, src: proc, fstype: procfs, opts: rw, state: mounted }
   - { path: /ram, src: tmpfs, fstype: tmpfs, opts: "rw,mode=01777,size=6g,noauto", state: present }
 
-services:
+sysrcs:
   - { name: zfs_enable, value: "YES" }
   - { name: clear_tmp_enable, value: "YES" }
   - { name: powerd_enable, value: "YES" }

@@ -1,7 +1,7 @@
 ---
 - name: set FreeBSD services
   include: sysrc.yml entry="{{ sysrc_entry }}"
-  loop: "{{ services }}"
+  loop: "{{ sysrcs }}"
   loop_control:
     loop_var: sysrc_entry
   when: ansible_distribution == 'FreeBSD'
