@@ -41,6 +41,7 @@ sysrcs:
   - { name: ntpd_enable, value: "YES" }
   - { name: ntpd_sync_on_start, value: "YES" }
   - { name: nfs_server_enable, value: "YES" }
+  - { name: nfs_reserved_port_only, value: "YES" }
   - { name: rpc_lockd_enable, value: "YES" }
   - { name: rpc_statd_enable, value: "YES" }
   - { name: rpcbind_enable, value: "YES" }
