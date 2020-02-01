@@ -27,7 +27,6 @@ packages_base:
     - sshpass
     - sudo
     - tmux
-    - unrar
     - unzip
     - wget
     - zip
@@ -35,6 +34,7 @@ packages_base:
   common_x86_64:
     - makepasswd
     - rar
+    - unrar
   FreeBSD:
     - ca_root_nss
     - daemontools-encore
@@ -98,7 +98,6 @@ packages_desktop:
   common:
     - emacs
     - filezilla
-    - firefox
     - gcompris
     - gimp
     - gthumb
@@ -109,6 +108,7 @@ packages_desktop:
     - xclip
     - xterm
   common_x86_64:
+    - firefox
     - vlc
     - wine
     - winetricks
