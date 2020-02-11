@@ -22,7 +22,7 @@ common_users:
   - name: admin
     comment: admin
     group: admin
-    groups:
+    groups: "{{ root_group }}"
     shell: /bin/sh
     uid: 2001
     home_mode: '0700'

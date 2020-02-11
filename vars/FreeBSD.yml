@@ -48,3 +48,5 @@ sysrcs:
   - { name: pf_enable, value: "YES" }
   - { name: pflog_enable, value: "YES" }
   - { name: dbus_enable, value: "YES" }
+
+root_group: wheel
