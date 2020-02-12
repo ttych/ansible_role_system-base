@@ -17,22 +17,22 @@ hostid_file: /etc/hostid
 common_groups:
   - { name: admin, gid: 2001 }
   - { name: empowered, gid: 2011 }
-  - { name: services, gid: 3113 }
+  - { name: service, gid: 3113 }
   - { name: logger, gid: 3114 }
 
 common_users:
   - name: admin
     comment: admin
     group: admin
-    groups: "{{ root_group }},services"
+    groups: "{{ root_group }},service"
     shell: /bin/sh
     uid: 2001
     home_mode: '0700'
     password: '*'
 
-  - name: services
-    comment: services
-    group: services
+  - name: service
+    comment: service
+    group: service
     groups:
     home: /nonexistent
     create_home: no
