@@ -5,6 +5,7 @@
     uid: "{{ user.uid }}"
     comment: "{{ user.comment }}"
     create_home: "{{ user.create_home | default(omit) }}"
+    home: "{{ user.home | default(omit) }}"
     force: yes
     group: "{{ user.group }}"
     groups: "{{ user.groups }}"
@@ -15,4 +16,6 @@
   user:
     name: "{{ user.name }}"
     password: "{{ user.password }}"
+    create_home: "{{ user.create_home | default(omit) }}"
+    home: "{{ user.home | default(omit) }}"
   when: user.password is defined
