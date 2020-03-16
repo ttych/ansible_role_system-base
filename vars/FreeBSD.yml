@@ -34,7 +34,7 @@ sysrcs:
   - { name: clear_tmp_enable, value: "YES" }
   - { name: powerd_enable, value: "YES" }
   - { name: tmpmfs, value: "YES" }
-  - { name: tmpsize, value: 100m }
+  - { name: tmpsize, value: 200m }
   - { name: syslogd_flags, value: "-ss" }
   - { name: sendmail_enable, value: "NONE" }
   - { name: sshd_enable, value: "YES" }
