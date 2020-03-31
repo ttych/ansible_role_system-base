@@ -13,13 +13,25 @@
     mode: "0755"
     state: directory
 
-# - name: deploy logrotate.conf
-#   template:
-#     src: "logrotate/logrotate.conf"
-#     dest: "{{ system_logrotate_conf }}"
-#     mode : "0644"
-#     owner: root
-#     group: "{{ root_group }}"
+- block:
+    - name: check logrotate.conf
+      stat:
+        path: "{{ system_logrotate_conf }}"
+      register: t_system_logrotate_conf
+
+    - name: check logrotate.conf.sample
+      stat:
+        path: "{{ system_logrotate_conf }}.sample"
+      register: t_system_logrotate_conf_sample
+
+    - name: deploy logrotate.conf
+      template:
+        src: "logrotate/logrotate.conf"
+        dest: "{{ system_logrotate_conf }}"
+        mode : "0644"
+        owner: root
+        group: "{{ root_group }}"
+      when: not t_system_logrotate_conf.stat.exists or (t_system_logrotate_conf_sample.stat.exists and t_system_logrotate_conf_sample.stat.checksum == t_system_logrotate_conf.stat.checksum)
 
 - name: set logrotate.conf options
   lineinfile:
