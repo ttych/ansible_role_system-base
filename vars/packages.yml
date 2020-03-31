@@ -17,6 +17,7 @@ packages_base:
     - knocker
     - latex2html
     - lftp
+    - logrotate
     - mercurial
     - nmap
     - p7zip

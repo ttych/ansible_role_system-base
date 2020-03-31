@@ -22,3 +22,18 @@ grub_configuration_path: /etc/default/grub
 fstabs: []
 
 services: []
+
+system_logrotate_conf: /etc/logrotate.conf
+system_logrotate_d: /etc/logrotate.d
+system_logrotate_user: root
+system_logrotate_group: adm
+system_logrotate_bin_path: /usr/sbin/logrotate
+system_logrotate_conf_entries:
+  - { regexp: "^weekly", line: "weekly" }
+  - { regexp: "^su ", line: "su {{ system_logrotate_user }} {{ system_logrotate_group }}" }
+  - { regexp: "^rotate ", line: "rotate 4" }
+  - { regexp: "^create", line: "create" }
+  - { regexp: "^compress", line: "compress" }
+  - { regexp: "^include {{ system_logrotate_d }}", line: "include {{ system_logrotate_d }}" }
+
+system_cron_daily_d: /etc/cron.daily

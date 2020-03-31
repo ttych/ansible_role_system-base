@@ -1,0 +1,20 @@
+#!/bin/sh
+
+{% if ansible_system == 'Linux' %}
+# skip in favour of systemd timer
+if [ -d /run/systemd/system ]; then
+    exit 0
+fi
+{% endif %}
+
+# this cronjob persists removals (but not purges)
+if [ ! -x "{{ system_logrotate_bin_path }}" ]; then
+    exit 0
+fi
+
+{{ system_logrotate_bin_path }} {{ system_logrotate_conf }}
+EXITVALUE=$?
+if [ $EXITVALUE != 0 ]; then
+    /usr/bin/logger -t logrotate "ALERT exited abnormally with [$EXITVALUE]"
+fi
+exit $EXITVALUE

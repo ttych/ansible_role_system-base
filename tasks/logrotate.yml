@@ -1,0 +1,45 @@
+---
+
+- name: install logrotate package
+  package:
+    name: logrotate
+    state: present
+
+- name: set logrotate.d directory
+  file:
+    path: "{{ system_logrotate_d }}"
+    owner: root
+    group: "{{ root_group }}"
+    mode: "0755"
+    state: directory
+
+# - name: deploy logrotate.conf
+#   template:
+#     src: "logrotate/logrotate.conf"
+#     dest: "{{ system_logrotate_conf }}"
+#     mode : "0644"
+#     owner: root
+#     group: "{{ root_group }}"
+
+- name: set logrotate.conf options
+  lineinfile:
+    path: "{{ system_logrotate_conf }}"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  loop: "{{ system_logrotate_conf_entries }}"
+
+- name: set cron.daily dir
+  file:
+    path: "{{ system_cron_daily_d }}"
+    owner: root
+    group: "{{ root_group }}"
+    mode: "0755"
+    state: directory
+
+- name: deploy cron.daily logrotate task
+  template:
+    src: "logrotate/cron.daily/logrotate"
+    dest: "{{ system_cron_daily_d }}/logrotate"
+    mode : "0644"
+    owner: root
+    group: "{{ root_group }}"

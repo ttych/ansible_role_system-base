@@ -50,3 +50,9 @@ sysrcs:
   - { name: dbus_enable, value: "YES" }
 
 root_group: wheel
+
+system_logrotate_conf: /usr/local/etc/logrotate.conf
+system_logrotate_d: /usr/local/etc/logrotate.d
+system_logrotate_group: wheel
+system_logrotate_bin_path: /usr/local/sbin/logrotate
+system_cron_daily_d: /etc/daily.local
