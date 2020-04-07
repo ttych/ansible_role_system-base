@@ -1,0 +1,3 @@
+* FreeBSD
+** make.conf
+   https://unix.stackexchange.com/questions/297317/you-have-security-openssl-installed-but-do-not-have-default-versions-ssl-openss#297322
