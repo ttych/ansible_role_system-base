@@ -1,4 +1,5 @@
 ---
+
 - name: install FreeBSD ports
   block:
     - name: check if installed
@@ -14,4 +15,26 @@
       shell: portsnap --interactive fetch update
       changed_when: no
 
-  when: ansible_distribution == 'FreeBSD'
+    - name: check make.conf presence
+      stat:
+        path: "{{ system_make_conf }}"
+      register: t_system_make_conf_stat
+
+    - name: touch make.conf
+      file:
+        path: "{{ system_make_conf }}"
+        owner: root
+        group: "{{ root_group }}"
+        mode: "0644"
+        state: touch
+      when: not t_system_make_conf_stat.stat.exists
+
+    - name: deploy make.conf for ports for server
+      lineinfile:
+        path: "{{ system_make_conf }}"
+        regexp: "^{{ item }}"
+        line: "{{ item }}"
+      loop: "{{ system_make_conf_server_entries }}"
+      when: hosttype == 'server'
+
+  when: ansible_system == 'FreeBSD'

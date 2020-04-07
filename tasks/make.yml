@@ -1,0 +1,26 @@
+---
+
+- name: configure make on FreeBSD
+  block:
+    - name: check make.conf presence
+      stat:
+        path: "{{ system_make_conf }}"
+      register: t_system_make_conf_stat
+
+    - name: touch make.conf
+      file:
+        path: "{{ system_make_conf }}"
+        owner: root
+        group: "{{ root_group }}"
+        mode: "0644"
+        state: touch
+      when: not t_system_make_conf_stat.stat.exists
+
+    - name: deploy make.conf
+      lineinfile:
+        path: "{{ system_make_conf }}"
+        regexp: "^{{ item.regexp }}"
+        line: "{{ item.line }}"
+      loop: "{{ system_make_conf_entries }}"
+
+  when: ansible_system == 'FreeBSD'

@@ -56,3 +56,14 @@ system_logrotate_d: /usr/local/etc/logrotate.d
 system_logrotate_group: wheel
 system_logrotate_bin_path: /usr/local/sbin/logrotate
 system_cron_daily_d: /etc/daily.local
+system_make_conf: /etc/make.conf
+system_make_conf_server_entries:
+  - "OPTIONS_UNSET += WAYLAND"
+  - "OPTIONS_UNSET += X11"
+  - "OPTIONS_UNSET += EXAMPLES"
+  - "OPTIONS_UNSET += DEBUG"
+  - "OPTIONS_UNSET += GUI"
+
+system_make_conf_entries:
+  - { regexp: "^MK_PROFILE=", line: "MK_PROFILE=no" }
+  # - { regexp: "^DEFAULT_VERSIONS\+=ssl=openssl", line: "DEFAULT_VERSIONS+=ssl=openssl" }
