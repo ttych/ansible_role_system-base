@@ -66,4 +66,5 @@ system_make_conf_server_entries:
 
 system_make_conf_entries:
   - { regexp: "^MK_PROFILE=", line: "MK_PROFILE=no" }
-  # - { regexp: "^DEFAULT_VERSIONS\+=ssl=openssl", line: "DEFAULT_VERSIONS+=ssl=openssl" }
+  # - { regexp: "^DEFAULT_VERSIONS\\+=ssl=openssl", line: "DEFAULT_VERSIONS+=ssl=openssl" }
+  - { regexp: "^DEFAULT_VERSIONS\\+=ssl=libressl", line: "DEFAULT_VERSIONS+=ssl=libressl" }

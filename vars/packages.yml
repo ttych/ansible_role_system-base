@@ -44,6 +44,7 @@ packages_base:
     - gtar
     - knock
     - ksh93
+    - libressl
     - p7zip-codec-rar
     - portmaster
     - py37-ansible
