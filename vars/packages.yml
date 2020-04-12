@@ -2,6 +2,7 @@
 packages_base:
   common:
     - apg
+    - arping
     - bash
     - curl
     - dvdbackup
