@@ -37,3 +37,5 @@ system_logrotate_conf_entries:
   - { regexp: "^include {{ system_logrotate_d }}", line: "include {{ system_logrotate_d }}" }
 
 system_cron_daily_d: /etc/cron.daily
+
+want_system_src: no

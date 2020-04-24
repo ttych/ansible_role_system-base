@@ -9,7 +9,6 @@
         - "{{ ansible_os_family }}.yml"
         - "{{ ansible_system }}.yml"
         - "empty.yml"
-    - include_tasks: root.yml
     - include_tasks: hosttype.yml
     - include_tasks: sysctls.yml
     - include_tasks: directories.yml
@@ -17,6 +16,7 @@
     - include_tasks: upgrade_mode.yml
     - include_tasks: repositories.yml
     - include_tasks: make.yml
+    - include_tasks: src.yml
     - include_tasks: ports.yml
     - include_tasks: packages.yml
     - include_tasks: groups.yml

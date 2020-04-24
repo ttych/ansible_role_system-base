@@ -1,0 +1,72 @@
+---
+
+- block:
+    - name: install FreeBSD src
+      block:
+        - name: check if src is svn installed
+          command: "svnlite info --show-item url {{ system_src_dir }}"
+          failed_when: no
+          changed_when: no
+          register: t_system_src_svn_current
+
+        - name: use releng branch
+          set_fact:
+            t_system_src_branch: "base/releng/{{ ansible_distribution_version }}"
+          when: ansible_distribution_release is search("-RELEASE")
+
+        - name: use stable branch
+          set_fact:
+            t_system_src_branch: "base/stable/{{ ansible_distribution_major_version }}"
+          when: ansible_distribution_release is search("-STABLE")
+
+        - name: use current branch
+          set_fact:
+            t_system_src_branch: "base/head/"
+          when: ansible_distribution_release is search("-CURRENT")
+
+        - block:
+            - name: register files to delete
+              find:
+                paths: "{{ system_src_dir }}"
+                patterns: "^.*"
+                file_type: any
+                hidden: yes
+                use_regex: true
+              register: t_system_src_files_to_delete
+
+            - name: clean "{{ system_src_dir }}"
+              file:
+                path: "{{ item.path }}"
+                state: absent
+              loop: "{{ t_system_src_files_to_delete.files }}"
+
+            - name: set permission for "{{ system_src_dir }}"
+              file:
+                path: "{{ system_src_dir }}"
+                owner: root
+                group: "{{ root_group }}"
+                mode: "0755"
+
+          when: t_system_src_svn_current.rc != 0
+
+        - name: checkout src for right branch
+          command: "svnlite checkout {{ freebsd_svn_url }}/{{ t_system_src_branch }} {{ system_src_dir }}"
+          when: t_system_src_svn_current.rc != 0 or t_system_src_svn_current.stdout != (freebsd_svn_url + "/" + t_system_src_branch)
+
+        - name: get remote version
+          command: "svnlite info -r HEAD --show-item last-changed-revision {{ system_src_dir }}"
+          changed_when: no
+          register: t_system_src_remote_version
+
+        - name: get local version
+          command: "svnlite info --show-item last-changed-revision {{ system_src_dir }}"
+          changed_when: no
+          register: t_system_src_local_version
+
+        - name: update local version
+          command: "svnlite update {{ system_src_dir }}"
+          when: t_system_src_remote_version.stdout != t_system_src_local_version.stdout
+
+      when: ansible_system == 'FreeBSD'
+
+  when: want_system_src
