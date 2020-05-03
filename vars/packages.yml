@@ -109,6 +109,7 @@ packages_desktop:
     - gthumb
     - mplayer
     - putty
+    - rxvt-unicode
     - vim
     - xbindkeys
     - xclip
