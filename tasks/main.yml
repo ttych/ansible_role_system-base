@@ -1,20 +1,19 @@
 ---
+
+- include: context.yml
+
 - block:
-    - name: context specific variables
-      include_vars:
-        file: "{{ item }}"
-      with_first_found:
-        - "{{ ansible_distribution_release }}.yml"
-        - "{{ ansible_distribution }}.yml"
-        - "{{ ansible_os_family }}.yml"
-        - "{{ ansible_system }}.yml"
-        - "empty.yml"
     - include_tasks: hosttype.yml
-    - include_tasks: sysctls.yml
-    - include_tasks: directories.yml
     - include_tasks: hostid.yml
+  tags:
+    - identification
+    - system
+
+- block:
+    - include_tasks: directories.yml
+    - include_tasks: sysctls.yml
     - include_tasks: upgrade_mode.yml
-    - include_tasks: repositories.yml
+    - include_tasks: package_repositories.yml
     - include_tasks: make.yml
     - include_tasks: src.yml
     - include_tasks: ports.yml
@@ -27,3 +26,5 @@
     - include_tasks: services.yml
     - include_tasks: grub.yml
     - include_tasks: logrotate.yml
+  tags:
+    - system

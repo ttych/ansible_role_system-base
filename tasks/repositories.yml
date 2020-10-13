@@ -1,3 +1,0 @@
----
-- include_tasks: repositories_Ubuntu.yml
-  when: ansible_distribution == 'Ubuntu'

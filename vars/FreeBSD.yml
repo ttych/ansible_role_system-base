@@ -1,4 +1,5 @@
 ---
+
 specific_directories:
   - { dest: '/usr/local/libdata', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
   - { dest: '/usr/local/libexec', mode: '0755', owner: 'root', group: "{{ root_group }}", state: 'directory' }
