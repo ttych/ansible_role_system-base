@@ -1,0 +1,13 @@
+---
+
+- name: "configure zfs on {{ ansible_distribution + '_' + ansible_distribution_release}}"
+  include_tasks:
+    file: "{{ item }}"
+  vars:
+    tasks_files:
+      files:
+        - "zfs_{{ ansible_distribution + '_' + ansible_distribution_release }}.yml"
+        - "zfs_{{ ansible_system }}.yml"
+        - "zfs_{{ ansible_os_family }}.yml"
+        - "zfs_{{ ansible_distribution }}.yml"
+  loop: "{{ q('first_found', tasks_files, errors='ignore') }}"

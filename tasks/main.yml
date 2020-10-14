@@ -28,5 +28,6 @@
     - include_tasks: logrotate.yml
     - include_tasks: fuse.yml
     - include_tasks: temperature.yml
+    - include_tasks: zfs.yml
   tags:
     - system
