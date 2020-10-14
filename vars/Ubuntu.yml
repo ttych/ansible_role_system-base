@@ -1,0 +1,5 @@
+---
+
+fuse_packages:
+  - sshfs
+  - httpfs2

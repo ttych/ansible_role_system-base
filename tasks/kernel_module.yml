@@ -1,0 +1,35 @@
+---
+
+- name: "check {{ module_name }} module status"
+  command: "kldstat -n {{ module_name }}.ko"
+  failed_when: false
+  changed_when: false
+  register: t_freebsd_kernel_module_status
+
+
+- block:
+    - name: "enable {{ module_name }} in boot loader.conf"
+      lineinfile:
+        path: "{{ boot_loader_conf }}"
+        regexp: '^{{ module_name }}_load='
+        line: '{{ module_name }}_load="YES"'
+
+    - name: "load {{ module_name }} module"
+      command: "kldload {{ module_name }}"
+      when: t_freebsd_kernel_module_status.rc != 0
+
+  when: module_status == 'enable'
+
+
+- block:
+    - name: "disable {{ module_name }} in boot loader.conf"
+      lineinfile:
+        path: "{{ boot_loader_conf }}"
+        regexp: '^{{ module_name }}_load='
+        state: absent
+
+    - name: "unload {{ module_name }} module"
+      command: "kldunload {{ module_name }}"
+      when: t_freebsd_kernel_module_status.rc == 0
+
+  when: module_status == 'disable'

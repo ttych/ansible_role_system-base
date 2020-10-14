@@ -5,5 +5,5 @@
     value: "{{ item.value }}"
     state: present
     reload: yes
-    sysctl_file: "{{ sysctl_file }}"
+    sysctl_file: "{{ sysctl_conf }}"
   loop: "{{ sysctls }}"

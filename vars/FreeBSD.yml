@@ -72,3 +72,10 @@ system_make_conf_entries:
   - { regexp: "^DEFAULT_VERSIONS\\+=ssl=libressl", line: "DEFAULT_VERSIONS+=ssl=libressl" }
 
 freebsd_svn_url: https://svn.freebsd.org
+
+boot_loader_conf: /boot/loader.conf
+
+fuse_packages:
+  - fusefs-sshfs
+fuse_sysctls:
+  - { name: vfs.usermount, value: 1 }

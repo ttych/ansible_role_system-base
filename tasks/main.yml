@@ -26,5 +26,7 @@
     - include_tasks: services.yml
     - include_tasks: grub.yml
     - include_tasks: logrotate.yml
+    - include_tasks: fuse.yml
+    - include_tasks: temperature.yml
   tags:
     - system

@@ -7,7 +7,7 @@ sudoers_d_dir: /etc/sudoers.d
 
 packages_cache_ttl: 43200
 
-sysctl_file: /etc/sysctl.conf
+sysctl_conf: /etc/sysctl.conf
 
 Ubuntu_release_upgrades_mode: normal
 Ubuntu_release_upgrades_conf: /etc/update-manager/release-upgrades
@@ -39,3 +39,7 @@ system_logrotate_conf_entries:
 system_cron_daily_d: /etc/cron.daily
 
 want_system_src: no
+
+want_fuse: yes
+fuse_packages: []
+fuse_sysctls: []
