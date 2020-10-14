@@ -1,0 +1,82 @@
+---
+
+- name: set pf_mode
+  block:
+    - set_fact:
+        pf_mode: router
+      when: is_router is defined and is_router
+    - set_fact:
+        pf_mode: "{{ hosttype }}"
+      when: is_router is not defined or not is_router
+  when: pf_mode is not defined
+
+- name: inherit interfaces
+  block:
+    - set_fact:
+        pf_lan_if: "{{ lan_if }}"
+      when: lan_if is defined
+
+    - set_fact:
+        pf_ext_if: "{{ ext_if }}"
+      when: ext_if is defined
+
+- name: set interfaces on router
+  block:
+    - set_fact:
+        pf_lan_if: "{{ ansible_default_ipv4.interface }}"
+      when: pf_lan_if is not defined
+
+    - set_fact:
+        pf_ext_if: "{{ ansible_interfaces | difference([ansible_default_ipv4.interface, 'lo0', 'pflog0']) | first }}"
+      when: pf_ext_if is not defined
+  when: pf_mode == 'router'
+
+- name: set interfaces on non-router
+  block:
+    - set_fact:
+        pf_ext_if: "{{ ansible_default_ipv4.interface }}"
+      when: pf_ext_if is not defined
+  when: pf_mode != 'router'
+
+- name: FreeBSD
+  block:
+    - name: deploy pf.conf
+      template:
+        src: "{{ item }}"
+        dest: "{{ pf_conf_file }}"
+        owner: root
+        group: "{{ root_group }}"
+        mode: '0440'
+      vars:
+        pf_conf_files:
+          files:
+            - "pf.{{ pf_mode }}.conf"
+            - "pf.{{ hosttype }}.conf"
+            - "pf.default.conf"
+          paths:
+            - 'templates/pf'
+      loop: "{{ q('first_found', pf_conf_files) }}"
+      register: t_pf_deploy_conf
+
+    - name: enable pf services
+      include: sysrc.yml entry="{{ pf_sysrc_entry }}"
+      loop: "{{ pf_sysrcs }}"
+      loop_control:
+        loop_var: pf_sysrc_entry
+
+    - name: set pf rules location
+      include: sysrc.yml entry="{{ pf_rules_sysrc }}"
+      vars:
+        pf_rules_sysrc:
+          name: pf_rules
+          value: "{{ pf_conf_file }}"
+
+    - name: start pf services
+      service:
+        name: "{{ pf_service }}"
+        state: started
+      loop: "{{ pf_services }}"
+      loop_control:
+        loop_var: pf_service
+
+  when: ansible_distribution == 'FreeBSD'

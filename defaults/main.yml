@@ -43,3 +43,10 @@ want_system_src: no
 want_fuse: yes
 fuse_packages: []
 fuse_sysctls: []
+
+want_pf: true
+want_max_security: false
+pf_services:
+  - pf
+  - pflog
+pf_conf_file: /etc/pf.conf

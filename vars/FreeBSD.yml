@@ -79,3 +79,7 @@ fuse_packages:
   - fusefs-sshfs
 fuse_sysctls:
   - { name: vfs.usermount, value: 1 }
+
+pf_sysrcs:
+  - { name: "pf_enable", value: "YES" }
+  - { name: "pflog_enable", value: "YES" }

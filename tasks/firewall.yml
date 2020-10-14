@@ -1,0 +1,12 @@
+---
+
+- name: pf
+  block:
+    - include_tasks: pf.yml
+      when:
+        - want_pf
+        - ansible_system in ['FreeBSD']
+
+    - name: set has_pf
+      set_fact:
+        has_pf: "{{ want_pf }}"
