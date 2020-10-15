@@ -40,13 +40,28 @@ system_cron_daily_d: /etc/cron.daily
 
 want_system_src: no
 
+want_max_security: false
+
 want_fuse: yes
 fuse_packages: []
 fuse_sysctls: []
 
 want_pf: true
-want_max_security: false
+
 pf_services:
   - pf
   - pflog
 pf_conf_file: /etc/pf.conf
+pf_blackhole_file: /etc/pf.blackhole
+pf_bruteforce_file: /etc/pf.bruteforce
+pf_os_file: /etc/pf.os
+
+sshd_service: sshd
+sshd_conf_file: /etc/ssh/sshd_config
+sshd_conf_entries_base:
+  - { regexp: '^PermitRootLogin ', line: 'PermitRootLogin no' }
+  - { regexp: '^PermitEmptyPasswords ', line: 'PermitEmptyPasswords no' }
+sshd_conf_entries_secure:
+  - { regexp: '^ChallengeResponseAuthentication ', line: 'ChallengeResponseAuthentication no'}
+  - { regexp: '^PasswordAuthentication ', line: 'PasswordAuthentication no' }
+  # - { regexp: '^UsePAM ', line: 'UsePAM no' }

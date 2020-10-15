@@ -1,0 +1,50 @@
+---
+
+- name: set sshd base config
+  lineinfile:
+    path: "{{ sshd_conf_file }}"
+    regexp: "{{ sshd_conf_entry.regexp }}"
+    line: "{{ sshd_conf_entry.line }}"
+  loop: "{{ sshd_conf_entries_base }}"
+  loop_control:
+    loop_var: sshd_conf_entry
+  register: t_sshd_conf_base
+
+- name: set sshd secure conf
+  lineinfile:
+    path: "{{ sshd_conf_file }}"
+    regexp: "{{ sshd_conf_entry.regexp }}"
+    line: "{{ sshd_conf_entry.line }}"
+  loop: "{{ sshd_conf_entries_secure }}"
+  loop_control:
+    loop_var: sshd_conf_entry
+  register: t_sshd_conf_secure
+  when: want_max_security
+
+
+- name: enable service on FreeBSD
+  include: sysrc.yml entry="{{ freebsd_sshd_service }}"
+  loop:
+    - { name: "{{ sshd_service }}_enable", value: "YES" }
+  loop_control:
+    loop_var: freebsd_sshd_service
+  when: ansible_system == 'FreeBSD'
+
+
+- name: enable service on Linux
+  service:
+    name: "{{ sshd_service }}"
+    enabled: yes
+  when: ansible_system == 'Linux'
+
+- name: start service
+  service:
+    name: "{{ sshd_service }}"
+    state: started
+  register: t_sshd_service
+
+- name: restart service if updated
+  service:
+    name: "{{ sshd_service }}"
+    state: restarted
+  when: (t_sshd_conf_base.changed or t_sshd_conf_secure.changed) and not t_sshd_service.changed
