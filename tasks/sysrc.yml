@@ -7,4 +7,5 @@
 
 - name: "update sysrc {{ entry.name }}"
   shell: "sysrc {{ entry.name }}={{ entry.value }}"
+  register: t_sysrc_update
   when: sysrc_entry_status.rc != 0 or sysrc_entry_status.stdout != entry.value

@@ -1,0 +1,54 @@
+---
+
+- name: install ntpd packages
+  package:
+    name: '{{ ntpd_packages }}'
+    state: 'present'
+  register: ntpd_install
+
+
+- name: configure on Linux
+  block:
+    - name: set ntpd servers
+      lineinfile:
+        path: "{{ ntpd_conf_file }}"
+        regexp: "^pool {{ item.pool }} "
+        line: "pool {{ item.pool }} {{ item.options }}"
+      loop: "{{ ntpd_servers }}"
+      register: t_ntpd_conf
+
+    # - name: set keys file content
+    #   # FIXME
+    #   register: chrony_keys_status
+
+    - name: enable ntpd service
+      service:
+        name: "{{ ntpd_service }}"
+        enabled: yes
+        state: started
+      register: t_ntpd_service
+
+    - name: restart service
+      service:
+        name: "{{ ntpd_service }}"
+        state: restarted
+      when: t_ntpd_conf.changed and not t_ntpd_service.changed
+
+  when: ansible_system == 'Linux'
+
+
+- name: configure on FreeBSD
+  block:
+    - name: enable ntpd service
+      include: sysrc.yml entry="{{ ntpd_sysrc }}"
+      loop: "{{ ntpd_sysrcs }}"
+      loop_control:
+        loop_var: ntpd_sysrc
+
+    - name: restart ntpd service
+      service:
+        name: "{{ ntpd_service }}"
+        state: restarted
+      when: t_sysrc_update.changed
+
+  when: ansible_system == 'FreeBSD'

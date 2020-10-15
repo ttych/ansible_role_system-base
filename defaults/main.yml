@@ -65,3 +65,7 @@ sshd_conf_entries_secure:
   - { regexp: '^ChallengeResponseAuthentication ', line: 'ChallengeResponseAuthentication no'}
   - { regexp: '^PasswordAuthentication ', line: 'PasswordAuthentication no' }
   # - { regexp: '^UsePAM ', line: 'UsePAM no' }
+
+want_ntpd: true
+ntpd_packages: []
+ntpd_service: ntpd

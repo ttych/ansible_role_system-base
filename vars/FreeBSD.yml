@@ -83,3 +83,7 @@ fuse_sysctls:
 pf_sysrcs:
   - { name: "pf_enable", value: "YES" }
   - { name: "pflog_enable", value: "YES" }
+
+ntpd_sysrcs:
+  - { name: "ntpd_enable", value: "YES" }
+  - { name: "ntpd_sync_on_start", value: "YES" }
