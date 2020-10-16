@@ -53,7 +53,7 @@ pf_services:
   - pflog
 pf_conf_file: /etc/pf.conf
 pf_blackhole_file: /etc/pf.blackhole
-pf_bruteforce_file: /etc/pf.bruteforce
+pf_banned_file: /etc/pf.banned
 pf_os_file: /etc/pf.os
 
 sshd_service: sshd
