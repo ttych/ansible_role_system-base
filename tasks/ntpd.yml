@@ -48,6 +48,11 @@
     - name: restart ntpd service
       service:
         name: "{{ ntpd_service }}"
+        state: started
+
+    - name: restart ntpd service
+      service:
+        name: "{{ ntpd_service }}"
         state: restarted
       when: t_sysrc_update.changed
 
