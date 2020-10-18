@@ -3,6 +3,11 @@
   include_vars:
     file: "{{ ansible_distribution }}.yml"
 
+- name: compute zfs_arc_max
+  set_fact:
+    zfs_arc_max: "{{ ansible_memtotal_mb // 2 }}M"
+  when: zfs_arc_max is not defined
+
 - name: set ZFS settings for boot loader
   lineinfile:
     path: "{{ boot_loader_conf }}"
@@ -12,7 +17,7 @@
     - regexp: '^zfs_load='
       line: 'zfs_load="YES"'
     - regexp: '^vfs.zfs.arc_max='
-      line: 'vfs.zfs.arc_max="{{ ansible_memtotal_mb // 2 }}M"'
+      line: 'vfs.zfs.arc_max="{{ zfs_arc_max }}"'
   loop_control:
     loop_var: boot_loader_conf_entry
 
