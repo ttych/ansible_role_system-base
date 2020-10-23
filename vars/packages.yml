@@ -5,6 +5,7 @@ packages_base:
     - arping
     - bash
     - curl
+    - dmidecode
     - dvdbackup
     - expect
     - ffmpeg
