@@ -96,7 +96,7 @@
         state: touch
         owner: root
         mode: 0640
-      when: not pf_file_status.stat.exist
+      when: not pf_file_status.stat.exists
 
     - name: check pf.os file status
       stat:
