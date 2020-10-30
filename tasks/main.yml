@@ -32,5 +32,6 @@
     - include_tasks: sshd.yml
     - include_tasks: ntpd.yml
     - include_tasks: firewall.yml
+    - include_tasks: audio.yml
   tags:
     - system

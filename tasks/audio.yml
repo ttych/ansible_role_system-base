@@ -1,0 +1,31 @@
+---
+
+- name: set audio mixer values on FreeBSD
+  block:
+    - name: update mixer vol
+      block:
+      - name: get mixer vol value
+        command: "mixer -S vol"
+        changed_when: no
+        register: t_audio_mixer_vol
+
+      - name: set mixer vol value
+        command: "mixer vol {{ audio_mixer_vol }}"
+        when: (t_audio_mixer_vol.stdout.split(':').1 | int) != audio_mixer_vol
+
+      when: audio_mixer_vol is defined
+
+    - name: update mixer pcm
+      block:
+      - name: get mixer pcm value
+        command: "mixer -S pcm"
+        changed_when: no
+        register: t_audio_mixer_pcm
+
+      - name: set mixer pcm value
+        command: "mixer pcm {{ audio_mixer_pcm }}"
+        when: (t_audio_mixer_pcm.stdout.split(':').1 | int) != audio_mixer_pcm
+
+      when: audio_mixer_pcm is defined
+
+  when: ansible_system == "FreeBSD"
