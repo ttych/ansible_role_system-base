@@ -54,6 +54,7 @@ pf_services:
 pf_conf_file: /etc/pf.conf
 pf_blackhole_file: /etc/pf.blackhole
 pf_banned_file: /etc/pf.banned
+pf_abuser_file: /etc/pf.abuser
 pf_os_file: /etc/pf.os
 
 sshd_service: sshd

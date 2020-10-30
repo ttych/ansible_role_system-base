@@ -85,6 +85,19 @@
         mode: 0640
       when: not pf_file_status.stat.exists
 
+    - name: check pf.abuser file status
+      stat:
+        path: "{{ pf_abuser_file }}"
+      register: pf_file_status
+
+    - name: create pf.abuser file
+      file:
+        path: "{{ pf_abuser_file }}"
+        state: touch
+        owner: root
+        mode: 0640
+      when: not pf_file_status.stat.exist
+
     - name: check pf.os file status
       stat:
         path: "{{ pf_os_file }}"
@@ -107,6 +120,7 @@
         - { path: "{{ pf_os_file }}", mode: "0640" }
         - { path: "{{ pf_banned_file }}", mode: "0600" }
         - { path: "{{ pf_blackhole_file }}", mode: "0600" }
+        - { path: "{{ pf_abuser_file }}", mode: "0600" }
 
     - name: enable pf services
       include: sysrc.yml entry="{{ pf_sysrc_entry }}"
