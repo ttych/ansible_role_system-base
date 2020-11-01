@@ -1,5 +1,7 @@
 ---
 
+sshd_service: ssh
+
 fuse_packages:
   - sshfs
   - httpfs2
