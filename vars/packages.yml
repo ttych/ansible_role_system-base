@@ -48,6 +48,7 @@ packages_base:
     - ksh93
     - libressl
     - p7zip-codec-rar
+    - pftop
     - portmaster
     - py37-ansible
     - rar
