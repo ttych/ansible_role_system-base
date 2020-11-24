@@ -28,6 +28,7 @@ packages_base:
     - ruby
     - screen
     - sshpass
+    - streamripper
     - sudo
     - tmux
     - unzip
