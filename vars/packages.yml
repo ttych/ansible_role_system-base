@@ -39,6 +39,7 @@ packages_base:
     - makepasswd
     - rar
     - unrar
+    - x86info
   FreeBSD:
     - ca_root_nss
     - daemontools-encore
