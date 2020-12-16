@@ -58,6 +58,7 @@ packages_base:
     - rubygem-capistrano
     - rubygem-irb
     - sqlite3
+    - x86info
     - zfsnap2
     - zfs-stats
   Ubuntu:
