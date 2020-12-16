@@ -81,3 +81,5 @@ sshd_conf_entries_secure:
 want_ntpd: true
 ntpd_packages: []
 ntpd_service: ntpd
+
+cpu_microcode_updater: devcpu-data

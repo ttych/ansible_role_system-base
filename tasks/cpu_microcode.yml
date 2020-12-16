@@ -1,0 +1,49 @@
+---
+
+- name: setup cpu microcode updater on FreeBSD
+  block:
+    - name: setup devcpu-data
+      block:
+        - name: install devcpu-data
+          package:
+            name: devcpu-data
+            state: present
+
+        - name: enable microcode_update service
+          include_tasks: sysrc.yml
+          vars: {
+            entry: { name: "microcode_update_enable", value: "YES" }
+          }
+
+        # alternative: in /boot/loader.conf
+        # cpu_microcode_load="YES"
+        # cpu_microcode_name="/boot/firmware/intel-ucode.bin"
+
+      when: cpu_microcode_updater == 'devcpu-data'
+
+
+    - name: setup cpupupdate
+      block:
+        - name: install cpupupdate
+          package:
+            name: cpupupdate
+            state: present
+
+        - name: enable cpuctl module at boot
+          include_tasks: kernel_module.yml
+          vars: {
+            module_name: "cpuctl",
+            module_status: "enable"
+          }
+
+        - name: enable cpu microcode update service
+          include_tasks: sysrc.yml
+          vars: {
+            entry: { name: "cpupdate_enable", value: "YES" }
+          }
+
+      when: cpu_microcode_updater == 'cpupdate'
+
+  when: ansible_system == 'FreeBSD'
+
+# ref: https://www.thomas-krenn.com/en/wiki/Update_Intel_Microcode_on_FreeBSD
