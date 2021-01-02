@@ -28,7 +28,7 @@ fstabs:
   # - { path: /dev, src: devfs, fstype: devfs, opts: rw, state: mounted }
   - { path: /dev/fd, src: fdesc, fstype: fdescfs, opts: rw, state: mounted }
   - { path: /proc, src: proc, fstype: procfs, opts: rw, state: mounted }
-  - { path: /ram, src: tmpfs, fstype: tmpfs, opts: "rw,mode=01777,size=6g,noauto", state: present }
+  - { path: /ram, src: tmpfs, fstype: tmpfs, opts: "rw,mode=01777,size={{ system_ram_fs_size }}{{ system_ram_fs_mounted | ternary('', ',noauto') }}", state: "{{ system_ram_fs_mounted | ternary('mounted', 'present') }}" }
 
 sysrcs:
   - { name: zfs_enable, value: "YES" }

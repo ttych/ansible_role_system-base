@@ -83,3 +83,5 @@ ntpd_packages: []
 ntpd_service: ntpd
 
 cpu_microcode_updater: devcpu-data
+
+system_ram_fs_mounted: no

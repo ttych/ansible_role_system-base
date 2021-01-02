@@ -1,4 +1,22 @@
 ---
+- name: compute system_ram_fs_size
+  set_fact:
+    system_ram_fs_size: "{{ ansible_memtotal_mb // 4 // 1000 | round }}g"
+  when: system_ram_fs_size is not defined
+
+- name: stat /ram directory
+  stat:
+    path: /ram
+  register: t_system_ram_fs_dir
+
+- name: create /ram directory
+  file:
+    path: /ram
+    mode: 0555
+    owner: root
+    state: directory
+  when: not t_system_ram_fs_dir.stat.exists
+
 - name: Set base mountpoint in fstab
   mount:
     path: "{{ fstab_entry.path }}"
