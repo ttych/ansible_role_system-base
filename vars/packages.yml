@@ -3,6 +3,7 @@ packages_base:
   common:
     - apg
     - arping
+    - aspell
     - bash
     - curl
     - dmidecode
@@ -36,11 +37,16 @@ packages_base:
     - zip
     - zsh
   common_x86_64:
+    - aspell-en
+    - aspell-fr
     - makepasswd
     - rar
     - unrar
     - x86info
   FreeBSD:
+    - aspell-ispell
+    - en-aspell
+    - fr-aspell
     - ca_root_nss
     - daemontools-encore
     - dialog4ports
