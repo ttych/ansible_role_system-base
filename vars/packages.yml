@@ -15,6 +15,7 @@ packages_base:
     - git
     - htop
     - iat
+    - inotify-tools
     - iperf
     - iperf3
     - knocker
