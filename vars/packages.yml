@@ -52,6 +52,7 @@ packages_base:
     - daemontools-encore
     - dialog4ports
     - fusefs-sshfs
+    - gmake
     - gtar
     - knock
     - ksh93
