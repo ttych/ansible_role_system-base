@@ -58,6 +58,7 @@ packages_base:
     - ksh93
     - libressl
     - lscpu
+    - password-store
     - p7zip-codec-rar
     - pftop
     - portmaster
