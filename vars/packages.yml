@@ -67,6 +67,7 @@ packages_base:
     - readline
     - rubygem-capistrano
     - rubygem-irb
+    - setsid
     - sqlite3
     - x86info
     - zfsnap2
