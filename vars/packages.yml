@@ -18,7 +18,6 @@ packages_base:
     - inotify-tools
     - iperf
     - iperf3
-    - knocker
     - latex2html
     - lftp
     - logrotate
