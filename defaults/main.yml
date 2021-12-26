@@ -63,9 +63,11 @@ pf_services:
   - pf
   - pflog
 pf_conf_file: /etc/pf.conf
-pf_blackhole_file: /etc/pf.blackhole
-pf_banned_file: /etc/pf.banned
-pf_abuser_file: /etc/pf.abuser
+pf_conf_dir: /etc/pf
+pf_blackhole_file: "{{ pf_conf_dir }}/blackhole.table"
+pf_banned_file: "{{ pf_conf_dir }}/banned.table"
+pf_abuser_file: "{{ pf_conf_dir }}/abuser.table"
+pf_trusted_file: "{{ pf_conf_dir }}/trusted.table"
 pf_os_file: /etc/pf.os
 
 sshd_service: sshd

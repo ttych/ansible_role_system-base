@@ -41,6 +41,14 @@
 
 - name: FreeBSD
   block:
+    - name: pf conf directory
+      file:
+        path: "{{ pf_conf_dir }}"
+        owner: root
+        group: "{{ root_group }}"
+        mode: "0700"
+        state: directory
+
     - name: deploy pf.conf
       template:
         src: "{{ item }}"
@@ -59,12 +67,12 @@
       loop: "{{ q('first_found', pf_conf_files) }}"
       register: t_pf_deploy_conf
 
-    - name: check pf.blackhole file status
+    - name: check pf blackhole table file status
       stat:
         path: "{{ pf_blackhole_file }}"
       register: pf_file_status
 
-    - name: create pf.blackhole file
+    - name: create pf blackhole table file
       file:
         path: "{{ pf_blackhole_file }}"
         state: touch
@@ -72,12 +80,12 @@
         mode: 0640
       when: not pf_file_status.stat.exists
 
-    - name: check pf.banned file status
+    - name: check pf banned table file status
       stat:
         path: "{{ pf_banned_file }}"
       register: pf_file_status
 
-    - name: create pf.banned file
+    - name: create pf banned table file
       file:
         path: "{{ pf_banned_file }}"
         state: touch
@@ -85,14 +93,27 @@
         mode: 0640
       when: not pf_file_status.stat.exists
 
-    - name: check pf.abuser file status
+    - name: check pf abuser table file status
       stat:
         path: "{{ pf_abuser_file }}"
       register: pf_file_status
 
-    - name: create pf.abuser file
+    - name: create pf abuser table file
       file:
         path: "{{ pf_abuser_file }}"
+        state: touch
+        owner: root
+        mode: 0640
+      when: not pf_file_status.stat.exists
+
+    - name: check pf trusted table file status
+      stat:
+        path: "{{ pf_trusted_file }}"
+      register: pf_file_status
+
+    - name: create pf trusted table file
+      file:
+        path: "{{ pf_trusted_file }}"
         state: touch
         owner: root
         mode: 0640
