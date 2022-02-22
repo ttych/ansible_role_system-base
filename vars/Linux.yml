@@ -22,3 +22,9 @@ ntpd_service: chrony
 ntpd_servers:
   - { pool: ntp.ubuntu.com, options: iburst maxsources 4}
   - { pool: 2.debian.pool.ntp.org, options: iburst }
+
+systemd_journald_conf: /etc/systemd/journald.conf
+systemd_journald_service: systemd-journald.service
+systemd_journald_settings:
+  - { setting: "SystemMaxUse", value: "{{ systemd_journald_SystemMaxUse[hosttype] | d(systemd_journald_SystemMaxUse['default']) }}" }
+  - { setting: "Compress", value: "{{ 'yes' if systemd_journald_Compress else 'no' }}" }

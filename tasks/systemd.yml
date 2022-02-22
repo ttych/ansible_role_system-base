@@ -1,0 +1,19 @@
+---
+
+- block:
+    - name: ensure journald settings
+      lineinfile:
+        path: "{{ systemd_journald_conf }}"
+        regexp: "^{{ item.setting }}="
+        line: "{{ item.setting }}={{ item.value }}"
+        insertafter: "[Journal]"
+      loop: "{{ systemd_journald_settings }}"
+      register: t_systemd_journald_conf_change
+
+    - name: reload journald
+      service:
+        name: "{{ systemd_journald_service }}"
+        state: restarted
+      when: t_systemd_journald_conf_change.changed
+
+  when: ansible_service_mgr == 'systemd'

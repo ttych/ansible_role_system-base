@@ -87,3 +87,9 @@ ntpd_service: ntpd
 cpu_microcode_updater: devcpu-data
 
 system_ram_fs_mounted: no
+
+systemd_journald_service: systemd-journald.service
+systemd_journald_SystemMaxUse:
+  server: 3G
+  default: 1G
+systemd_journald_Compress: yes
