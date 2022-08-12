@@ -76,9 +76,11 @@ freebsd_svn_url: https://svn.freebsd.org
 boot_loader_conf: /boot/loader.conf
 
 fuse_packages:
+  - fuse-utils
   - fusefs-sshfs
 fuse_sysctls:
   - { name: vfs.usermount, value: 1 }
+fuse_module_name: fusefs
 
 pf_sysrcs:
   - { name: "pf_enable", value: "YES" }

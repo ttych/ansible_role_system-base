@@ -18,7 +18,7 @@
           loop: "{{ fuse_sysctls }}"
 
         - name: load fuse kernel module
-          include: kernel_module.yml module_name=fuse module_status=enable
+          include: kernel_module.yml module_name="{{ fuse_module_name }}" module_status=enable
 
       when: ansible_system == 'FreeBSD'
 

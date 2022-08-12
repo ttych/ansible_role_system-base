@@ -24,7 +24,6 @@ packages_base:
     - makepasswd
     - mercurial
     - nmap
-    - p7zip
     - python
     - rsync
     - ruby
@@ -40,6 +39,7 @@ packages_base:
   common_x86_64:
     - aspell-en
     - aspell-fr
+    - p7zip
     - rar
     - unrar
     - whois
@@ -59,10 +59,8 @@ packages_base:
     - libressl
     - lscpu
     - password-store
-    - p7zip-codec-rar
     - pftop
     - portmaster
-    - py37-ansible
     - rar
     - readline
     - rubygem-capistrano
@@ -72,6 +70,7 @@ packages_base:
     - x86info
     - zfsnap2
     - zfs-stats
+    - 7-zip
   Ubuntu:
     - abcde
     - ansible
@@ -108,7 +107,7 @@ packages_server:
   common:
     - emacs-nox
   FreeBSD:
-    - vim-console
+    - vim
   Ubuntu:
     - dhcpcd-common
     - dhcping
@@ -121,7 +120,7 @@ packages_desktop:
   common:
     - emacs
     - filezilla
-    - gcompris
+    - gcompris-qt
     - gimp
     - gthumb
     - mplayer
