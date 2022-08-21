@@ -42,16 +42,3 @@
         autoremove: yes
 
   when: ansible_pkg_mgr == 'apt'
-
-- name: FreeBSD
-  block:
-    - name: update catalog
-      shell: "pkg update -q"
-      changed_when: false
-
-    - name: "pkg install {{ hosttype }} packages"
-      pkgng:
-        name: "{{ system_computed_packages }}"
-        state: latest
-
-  when: ansible_os_family == 'FreeBSD'
