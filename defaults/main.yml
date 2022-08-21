@@ -53,10 +53,6 @@ want_system_src: no
 
 want_max_security: false
 
-want_fuse: yes
-fuse_packages: []
-fuse_sysctls: []
-
 want_pf: true
 
 pf_services:

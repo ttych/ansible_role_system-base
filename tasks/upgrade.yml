@@ -1,4 +1,5 @@
 ---
+
 - name: set Ubuntu upgrade mode
   lineinfile:
     path: "{{ Ubuntu_release_upgrades_conf }}"

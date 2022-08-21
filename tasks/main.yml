@@ -12,9 +12,8 @@
 - block:
     - include_tasks: directories.yml
     - include_tasks: sysctls.yml
-    - include_tasks: upgrade_mode.yml
-    - include_tasks: package_repositories.yml
-    - include_tasks: make.yml
+    - include_tasks: upgrade.yml
+    - include_tasks: package_manager.yml
     - include_tasks: src.yml
     - include_tasks: ports.yml
     - include_tasks: packages.yml
@@ -27,8 +26,6 @@
     - include_tasks: services.yml
     - include_tasks: grub.yml
     - include_tasks: logrotate.yml
-    - include_tasks: fuse.yml
-    - include_tasks: temperature.yml
     - include_tasks: cpu_microcode.yml
     - include_tasks: zfs.yml
     - include_tasks: sshd.yml

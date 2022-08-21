@@ -58,29 +58,6 @@ system_logrotate_group: wheel
 system_logrotate_bin_path: /usr/local/sbin/logrotate
 system_cron_daily_d: /etc/daily.local
 system_src_dir: /usr/src
-system_make_conf: /etc/make.conf
-system_make_conf_server_entries:
-  - "OPTIONS_UNSET += WAYLAND"
-  - "OPTIONS_UNSET += X11"
-  - "OPTIONS_UNSET += EXAMPLES"
-  - "OPTIONS_UNSET += DEBUG"
-  - "OPTIONS_UNSET += GUI"
-
-system_make_conf_entries:
-  - { regexp: "^MK_PROFILE=", line: "MK_PROFILE=no" }
-  # - { regexp: "^DEFAULT_VERSIONS\\+=ssl=openssl", line: "DEFAULT_VERSIONS+=ssl=openssl" }
-  - { regexp: "^DEFAULT_VERSIONS\\+=ssl=libressl", line: "DEFAULT_VERSIONS+=ssl=libressl" }
-
-freebsd_svn_url: https://svn.freebsd.org
-
-boot_loader_conf: /boot/loader.conf
-
-fuse_packages:
-  - fuse-utils
-  - fusefs-sshfs
-fuse_sysctls:
-  - { name: vfs.usermount, value: 1 }
-fuse_module_name: fusefs
 
 pf_sysrcs:
   - { name: "pf_enable", value: "YES" }
