@@ -24,7 +24,6 @@ packages_base:
     - makepasswd
     - mercurial
     - nmap
-    - python
     - rsync
     - ruby
     - screen
@@ -40,6 +39,7 @@ packages_base:
     - aspell-en
     - aspell-fr
     - p7zip
+    - powertop
     - rar
     - unrar
     - whois
@@ -61,6 +61,7 @@ packages_base:
     - password-store
     - pftop
     - portmaster
+    - python
     - rar
     - readline
     - rubygem-capistrano
@@ -93,12 +94,14 @@ packages_base:
     - nfs-common
     - nfs-kernel-server
     - openssh-server
+    - python3
     - samba
     - software-properties-common
     - sshfs
     - strace
     - tightvncserver
     - ubuntu-standard
+    - youtube-dl
   Ubuntu_x86_64:
     - zfsnap
     - zfsutils-linux
