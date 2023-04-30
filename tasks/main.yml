@@ -15,7 +15,6 @@
     - include_tasks: upgrade.yml
     - include_tasks: package_manager.yml
     - include_tasks: src.yml
-    - include_tasks: ports.yml
     - include_tasks: packages.yml
     - include_tasks: groups.yml
     - include_tasks: users.yml

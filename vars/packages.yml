@@ -91,6 +91,8 @@ packages_base:
     - libsqlite3-dev
     - libtcmalloc-minimal4
     - lm-sensors
+    - ncal
+    - net-tools
     - nfs-common
     - nfs-kernel-server
     - openssh-server

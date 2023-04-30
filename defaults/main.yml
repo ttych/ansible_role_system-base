@@ -34,6 +34,8 @@ fstabs: []
 
 services: []
 
+system_make_conf: /etc/make.conf
+
 system_logrotate_conf: /etc/logrotate.conf
 system_logrotate_d: /etc/logrotate.d
 system_logrotate_user: root
